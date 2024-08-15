@@ -1,0 +1,29 @@
+<div>
+    <h1>Todo List For: {{listName}}</h1>
+    <p>Name/description of list:</p>
+    <input type="text" [(ngModel)]="listName">
+    <p>(i.e.:"Weekend chores", "Vacation planning", ...)</p>
+</div>
+<ng-container *ngIf="!isEmpty">
+    <ul>
+        <li *ngFor="let item of toDoList, let i = index">
+            <input type="checkbox" [(ngModel)]="item.completed" (change)="checkAlldone()">
+            <span>{{item.name}}</span>
+            <button type="button" (click)="editItem(i)">edit</button>
+            <button type="button" (click)="confirmDelete(i)">delete</button>
+        </li>
+    </ul>
+</ng-container>
+<div>
+    <div>
+        <label>item name: </label>
+        <input type="text" [(ngModel)]="newName">
+    </div>
+    <div>
+        <label>item priority: </label>
+        <input type="number" [(ngModel)]="newPriority">
+    </div>
+    
+    <button type="button" (click)="addItem(newName, newPriority)">add</button>
+    <button type="button" (click)="allDone()" [disabled]="!AllSelected">all done</button>
+</div>
